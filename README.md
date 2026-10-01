@@ -30,7 +30,20 @@ This assignment works on building an Express service that answers weather questi
 | GET | /api/cache/stats | How many answers are cached, and how often the cache was used |
 
 ---
-## 5. AI Use
+## 5. Testing
+1. weather for a city:  --> 
+2. the same city again (cached):  --> 
+3. weather without a city:  --> 
+4. weather for a city that doesn't exist:  --> 
+5. compare three cities:  --> 
+6. compare with one city that doesn't exist:  --> 
+7. compare too many cities:  --> 
+8. compare with a repeated city:  --> 
+9. cache stats:  --> 
+10. an unknown route:  --> 
+
+---
+## 6. AI Use
 If You didn't use any
 - "No AI tools used."
 
@@ -41,7 +54,7 @@ If AI tools used
 - example: Any other specific situations needing AI tools
 
 ---
-## 6. Credit
+## 7. Credit
 - Used the assignments/assignment-1-starter repository provided by Professor Dor.
 -  Open-Meteo API - https://open-meteo.com/
 
