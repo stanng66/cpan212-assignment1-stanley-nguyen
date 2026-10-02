@@ -44,14 +44,8 @@ This assignment works on building an Express service that answers weather questi
 
 ---
 ## 6. AI Use
-If You didn't use any
-- "No AI tools used."
-
-If AI tools used
-- example: GitHub Copilot for auto-complete
-- example: Microsoft Copilot for debugging help
-- example: Copilot for explaining error messages
-- example: Any other specific situations needing AI tools
+- Copilot for explaining error messages when using npm run dev to quality check every file I worked on before pushing 
+- 
 
 ---
 ## 7. Credit
