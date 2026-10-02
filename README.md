@@ -45,7 +45,7 @@ This assignment works on building an Express service that answers weather questi
 ---
 ## 6. AI Use
 - Copilot for explaining error messages when using npm run dev to quality check every file I worked on before pushing 
-- 
+- Used copilot auto-complete in vs code sparringly when finishing out minor codes, such as Error statement, if auto suggestion fits overall logic
 
 ---
 ## 7. Credit
