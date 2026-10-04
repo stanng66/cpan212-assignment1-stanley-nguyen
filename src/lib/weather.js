@@ -30,7 +30,7 @@ function weatherSummary(location, forecast) {
       temperatureC: current.temperature_2m,
       feelsLikeC: current.apparent_temperature,
       humidityPercent: current.relative_humidity_2m,
-      windKmh: current.wind_speed_10m,
+      windKmH: current.wind_speed_10m,
       weatherCode: current.weather_code,
       conditions: describeWeatherCode(current.weather_code)
     },
@@ -54,9 +54,6 @@ function isExpired(entry) {
   return ageSeconds > ttlSeconds;
 }
 
-// Check the cache first. On a miss, geocode the city, get
-// the forecast, build the summary, store it, and return it with cached: false.
-// On a hit, return the stored summary with cached: true.
 export async function getCityWeather(city) {
   const key = city.trim().toLowerCase();
 
@@ -64,6 +61,7 @@ export async function getCityWeather(city) {
   const entry = cache.get(key);
   if (entry && !isExpired(entry)) {
     cacheHits++;
+    // On a hit, return the stored summary with cached: true.
     return { ...entry.summary, cached: true };
   }
 
