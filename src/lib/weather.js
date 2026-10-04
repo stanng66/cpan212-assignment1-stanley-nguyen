@@ -90,16 +90,16 @@ export async function getCityWeather(city) {
 // TODO (you): return the cache statistics for GET /api/cache/stats.
 export function getCacheStats() {
   // throw new Error('getCacheStats is not written yet');
-  let entires = 0;
+  let entries = 0;
 
   for (const entry of cache.values()) {
     if (!isExpired(entry)) {
-      entires++;
+      entries++;
     }
   }
 
   return {
-    entires,
+    entries,
     hits: cacheHits,
     misses: cacheMisses,
     ttlSeconds: config.cacheTtlSeconds
