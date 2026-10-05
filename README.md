@@ -13,7 +13,7 @@ This assignment works on building an Express service that answers weather questi
 ## 2. How to Run the Project
 1) npm install
 2) .env.example .env
-3) npm run dev
+3) npm run dev or npm start
 
 ---
 ## 3. PORT Environment Variables
@@ -35,44 +35,44 @@ This assignment works on building an Express service that answers weather questi
 
 ---
 ## 5. Testing
-1. weather for a city: 
-   curl -i "http://localhost:4000/api/weather?city=Toronto" 
+1. weather for a city:  
+curl -i "http://localhost:4000/api/weather?city=Toronto"  
+-> 200
+
+2. the same city again (cached):  
+   curl -i "http://localhost:4000/api/weather?city=Toronto"  
    --> 200
 
-2. the same city again (cached): 
-   curl -i "http://localhost:4000/api/weather?city=Toronto" 
-   --> 200
-
-3. weather without a city: 
-   curl -i "http://localhost:4000/api/weather" 
+3. weather without a city:  
+   curl -i "http://localhost:4000/api/weather"  
    --> 400
 
-4. weather for a city that doesn't exist: 
-   curl -i "http://localhost:4000/api/weather?city=NotARealCity" 
+4. weather for a city that doesn't exist:  
+   curl -i "http://localhost:4000/api/weather?city=NotARealCity"  
    --> 404 
 
-5. compare three cities: 
-   curl -i "http://localhost:4000/api/compare?cities=Toronto,Vancouver,Halifax" 
+5. compare three cities:  
+   curl -i "http://localhost:4000/api/compare?cities=Toronto,Vancouver,Halifax"  
    --> 200
 
-6. compare with one city that doesn't exist: 
-   curl -i "http://localhost:4000/api/compare?cities=Toronto,FakeCity,Halifax" 
+6. compare with one city that doesn't exist:  
+   curl -i "http://localhost:4000/api/compare?cities=Toronto,FakeCity,Halifax"  
    --> 200
 
-7. compare too many cities: 
-   curl -i "http://localhost:4000/api/compare?cities=A,B,C,D,E,F" 
+7. compare too many cities:  
+   curl -i "http://localhost:4000/api/compare?cities=A,B,C,D,E,F"  
    --> 400
 
-8. compare with a repeated city: 
-   curl -i "http://localhost:4000/api/compare?cities=Toronto,Toronto" 
+8. compare with a repeated city:  
+   curl -i "http://localhost:4000/api/compare?cities=Toronto,Toronto"  
    --> 400
 
-9. cache stats: 
-   curl -i "http://localhost:4000/api/cache/stats" 
+9. cache stats:  
+   curl -i "http://localhost:4000/api/cache/stats"  
    --> 200
 
-10. an unknown route: 
-    curl -i "http://localhost:4000/api/does-not-exist" 
+10. an unknown route:  
+    curl -i "http://localhost:4000/api/does-not-exist"  
     --> 404
 
 ---
