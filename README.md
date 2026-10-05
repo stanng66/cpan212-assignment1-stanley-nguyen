@@ -37,7 +37,7 @@ This assignment works on building an Express service that answers weather questi
 ## 5. Testing
 1. weather for a city:  
 curl -i "http://localhost:4000/api/weather?city=Toronto"  
--> 200
+--> 200
 
 2. the same city again (cached):  
    curl -i "http://localhost:4000/api/weather?city=Toronto"  
