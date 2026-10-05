@@ -6,20 +6,24 @@
 - October 13, 2026
 
 ---
-
 ## 1. What This Project Is
 This assignment works on building an Express service that answers weather questions by calling Open-Meteo, a free weather API with no key. 
 
 ---
 ## 2. How to Run the Project
-'''bash
 1) npm install
 2) .env.example .env
 3) npm run dev
 
 ---
 ## 3. PORT Environment Variables
-- 
+| Variable | Default | Controls |
+|----------|---------|----------|
+| PORT | 4000 | The port the server listens on |
+| GEOCODING_URL | https://geocoding-api.open-meteo.com/v1 | Base URL of the geocoding API |
+| FORECAST_URL | https://api.open-meteo.com/v1 | Base URL of the forecast API |
+| UPSTREAM_TIMEOUT_MS | 5000 | How long to wait for each Open-Meteo request |
+| CACHE_TTL_SECONDS | 600 | How long a cached answer stays valid |
 
 ---
 ## 4. List of the Routes
@@ -31,16 +35,45 @@ This assignment works on building an Express service that answers weather questi
 
 ---
 ## 5. Testing
-1. weather for a city:  --> 
-2. the same city again (cached):  --> 
-3. weather without a city:  --> 
-4. weather for a city that doesn't exist:  --> 
-5. compare three cities:  --> 
-6. compare with one city that doesn't exist:  --> 
-7. compare too many cities:  --> 
-8. compare with a repeated city:  --> 
-9. cache stats:  --> 
-10. an unknown route:  --> 
+1. weather for a city: 
+   curl -i "http://localhost:4000/api/weather?city=Toronto" 
+   --> 200
+
+2. the same city again (cached): 
+   curl -i "http://localhost:4000/api/weather?city=Toronto" 
+   --> 200
+
+3. weather without a city: 
+   curl -i "http://localhost:4000/api/weather" 
+   --> 400
+
+4. weather for a city that doesn't exist: 
+   curl -i "http://localhost:4000/api/weather?city=NotARealCity" 
+   --> 404 
+
+5. compare three cities: 
+   curl -i "http://localhost:4000/api/compare?cities=Toronto,Vancouver,Halifax" 
+   --> 200
+
+6. compare with one city that doesn't exist: 
+   curl -i "http://localhost:4000/api/compare?cities=Toronto,FakeCity,Halifax" 
+   --> 200
+
+7. compare too many cities: 
+   curl -i "http://localhost:4000/api/compare?cities=A,B,C,D,E,F" 
+   --> 400
+
+8. compare with a repeated city: 
+   curl -i "http://localhost:4000/api/compare?cities=Toronto,Toronto" 
+   --> 400
+
+9. cache stats: 
+   curl -i "http://localhost:4000/api/cache/stats" 
+   --> 200
+
+10. an unknown route: 
+    curl -i "http://localhost:4000/api/does-not-exist" 
+    --> 404
 
 ---
 ## 6. AI Use
@@ -51,4 +84,3 @@ This assignment works on building an Express service that answers weather questi
 ## 7. Credit
 - Used the assignments/assignment-1-starter repository provided by Professor Dor.
 -  Open-Meteo API - https://open-meteo.com/
-

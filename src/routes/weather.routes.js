@@ -5,7 +5,7 @@ import { getCityWeather } from '../lib/weather.js';
 export const weatherRouter = Router();
 
 // TODO (you): GET /api/weather?city=Toronto
-weatherRouter.get('/weather', async (req, res) => {
+weatherRouter.get('/weather', async (req, res, next) => {
   // Validate with parseCity, get the summary with getCityWeather
   try {
     const city = parseCity(req.query.city);
@@ -15,12 +15,12 @@ weatherRouter.get('/weather', async (req, res) => {
     res.json({ data: summary, attribution: "Weather data by Open-Meteo.com (https://open-meteo.com/)" });
 
   } catch (error) {
-    res.status(500).json({ error: { message: 'Internal server error' } });
+    next(error);
   }
 });
 
 // TODO (you): GET /api/compare?cities=Toronto,Vancouver,Halifax
-weatherRouter.get('/compare', async (req, res) => {
+weatherRouter.get('/compare', async (req, res, next) => {
   try {
     // Validate with parseCities, 
     const cities = parseCities(req.query.cities);
@@ -58,6 +58,6 @@ weatherRouter.get('/compare', async (req, res) => {
 
     res.json({ data: {cities: finalArray, summary: { succeeded, failed, warmest, coldest } }, attribution: "Weather data by Open-Meteo.com (https://open-meteo.com/)" });
   } catch (error) {
-    res.status(500).json({ error: { message: 'Internal server error' } });
+    next(error);
   }
 });
