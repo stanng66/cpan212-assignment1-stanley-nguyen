@@ -1,8 +1,10 @@
 import { config } from '../config.js';
 import { geocodeCity, getForecast } from './open-meteo.js';
 import { describeWeatherCode } from './weather-codes.js';
+import { get, set } from './cache.js';
 
 // TODO (you): create one cache for the whole app, with a time to live of
+/* 
 const cache = new Map();
 
 let cacheHits = 0;
@@ -10,6 +12,7 @@ let cacheMisses = 0;
 
 // config.cacheTtlSeconds.
 const ttlSeconds = config.cacheTtlSeconds;
+*/
 
 // TODO (you): return the weather summary for one city, in the shape shown on the assignment page.
 function weatherSummary(location, forecast) {
@@ -30,7 +33,7 @@ function weatherSummary(location, forecast) {
       temperatureC: current.temperature_2m,
       feelsLikeC: current.apparent_temperature,
       humidityPercent: current.relative_humidity_2m,
-      windKmH: current.wind_speed_10m,
+      windKmh: current.wind_speed_10m,
       weatherCode: current.weather_code,
       conditions: describeWeatherCode(current.weather_code)
     },
@@ -49,20 +52,16 @@ function weatherSummary(location, forecast) {
   };
 }
 
-function isExpired(entry) {
-  const ageSeconds = (Date.now() - entry.storedAt) / 1000;
-  return ageSeconds > ttlSeconds;
-}
-
 export async function getCityWeather(city) {
   const key = city.trim().toLowerCase();
 
   // Check the cache first.
-  const entry = cache.get(key);
-  if (entry && !isExpired(entry)) {
-    cacheHits++;
+  const entry = get(key);
+  if (entry) {
     // On a hit, return the stored summary with cached: true.
-    return { ...entry.summary, cached: true };
+    const cachedSummary = structuredClone(entry);
+    cachedSummary.cached = true;
+    return cachedSummary;
   }
 
   // On a miss, geocode the city, get the forecast
@@ -75,10 +74,7 @@ export async function getCityWeather(city) {
   const summary = weatherSummary(location, forecast);
 
   // store it,
-  cache.set(key, {
-    summary,
-    storedAt: Date.now()
-  });
+  set(key, summary);
 
   // and return it with cached: false.
   return summary;
