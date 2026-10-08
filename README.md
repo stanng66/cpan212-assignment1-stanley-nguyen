@@ -26,7 +26,15 @@ This assignment works on building an Express service that answers weather questi
 | CACHE_TTL_SECONDS | 600 | How long a cached answer stays valid |
 
 ---
-## 4. List of the Routes
+### 4. Endpoints
+| Endpoint | Request example | Description |
+|----------|-----------------|-------------|
+| GET /api/weather | curl -i "http://localhost:4000/api/weather?city=Toronto" | Looks up one city and returns a weather summary with current conditions and a 3‑day forecast. | 
+| GET /api/compare | curl -i "http://localhost:4000/api/compare?cities=Toronto,Vancouver,Halifax" | Compares 2–5 cities and returns weather results plus a warmest/coldest summary. |
+| GET /api/cache/stats | curl -i "http://localhost:4000/api/cache/stats" | Shows cache entries, hits, misses, and TTL. |
+
+---
+## 5. List of the Routes
 | Method | Path | What it does |
 |--------|------|--------------|
 | GET | /api/weather?city=Toronto | Current weather and a 3-day forecast for one city |
@@ -34,53 +42,43 @@ This assignment works on building an Express service that answers weather questi
 | GET | /api/cache/stats | How many answers are cached, and how often the cache was used |
 
 ---
-## 5. Testing
-1. weather for a city:  
+## 6. Testing
+1. weather for a city: 200
 curl -i "http://localhost:4000/api/weather?city=Toronto"  
---> 200
 
-2. the same city again (cached):  
+2. the same city again (cached): 200 
    curl -i "http://localhost:4000/api/weather?city=Toronto"  
-   --> 200
 
-3. weather without a city:  
+3. weather without a city: 400
    curl -i "http://localhost:4000/api/weather"  
-   --> 400
 
-4. weather for a city that doesn't exist:  
+4. weather for a city that doesn't exist: 404 
    curl -i "http://localhost:4000/api/weather?city=NotARealCity"  
-   --> 404 
 
-5. compare three cities:  
+5. compare three cities: 200
    curl -i "http://localhost:4000/api/compare?cities=Toronto,Vancouver,Halifax"  
-   --> 200
 
-6. compare with one city that doesn't exist:  
+6. compare with one city that doesn't exist: 200
    curl -i "http://localhost:4000/api/compare?cities=Toronto,FakeCity,Halifax"  
-   --> 200
 
-7. compare too many cities:  
+7. compare too many cities: 400
    curl -i "http://localhost:4000/api/compare?cities=A,B,C,D,E,F"  
-   --> 400
 
-8. compare with a repeated city:  
+8. compare with a repeated city: 400
    curl -i "http://localhost:4000/api/compare?cities=Toronto,Toronto"  
-   --> 400
 
-9. cache stats:  
+9. cache stats: 200
    curl -i "http://localhost:4000/api/cache/stats"  
-   --> 200
 
-10. an unknown route:  
+10. an unknown route: 404
     curl -i "http://localhost:4000/api/does-not-exist"  
-    --> 404
 
 ---
-## 6. AI Use
-- Copilot for explaining error messages when using npm run dev to quality check every file I worked on before pushing 
-- Used copilot auto-complete in vs code sparringly when finishing out minor codes, such as Error statement, if auto suggestion fits overall logic
+## 7. AI Use
+- Microsoft Copilot - Used for explaining error messages and assist with minor completetions 
+- Copilot auto-complete in vs code - Used sparringly when finishing out minor codes, such as Error statement, if auto suggestion fits overall logic
 
 ---
-## 7. Credit
+## 8. Credit
 - Used the assignments/assignment-1-starter repository provided by Professor Dor.
--  Open-Meteo API - https://open-meteo.com/
+-  Weather data provided by Open-Meteo API - https://open-meteo.com/
