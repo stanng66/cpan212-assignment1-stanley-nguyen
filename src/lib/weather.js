@@ -3,16 +3,16 @@ import { geocodeCity, getForecast } from './open-meteo.js';
 import { describeWeatherCode } from './weather-codes.js';
 import { get, set } from './cache.js';
 
-// TODO (you): create one cache for the whole app, with a time to live of
-/* 
+// TODO (you): create one cache for the whole app, with a time to live of config.cacheTtlSeconds.
 const cache = new Map();
-
 let cacheHits = 0;
 let cacheMisses = 0;
-
-// config.cacheTtlSeconds.
 const ttlSeconds = config.cacheTtlSeconds;
-*/
+
+function isExpired(entry) {
+  const ageSeconds = (Date.now() - entry.storedAt) / 1000;
+  return ageSeconds > ttlSeconds;
+}
 
 // TODO (you): return the weather summary for one city, in the shape shown on the assignment page.
 function weatherSummary(location, forecast) {
@@ -57,9 +57,10 @@ export async function getCityWeather(city) {
 
   // Check the cache first.
   const entry = get(key);
-  if (entry) {
+  if (entry && !isExpired(entry)) {
     // On a hit, return the stored summary with cached: true.
-    const cachedSummary = structuredClone(entry);
+    cacheHits++;
+    const cachedSummary = structuredClone(entry.summary);
     cachedSummary.cached = true;
     return cachedSummary;
   }
@@ -74,7 +75,7 @@ export async function getCityWeather(city) {
   const summary = weatherSummary(location, forecast);
 
   // store it,
-  set(key, summary);
+  cache.set(key, {summary, storedAt: Date.now()});
 
   // and return it with cached: false.
   return summary;
