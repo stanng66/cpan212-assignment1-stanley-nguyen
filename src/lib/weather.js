@@ -79,12 +79,10 @@ export async function getCityWeather(city) {
 
   // and return it with cached: false.
   return summary;
-  // throw new Error('getCityWeather is not written yet');
 }
 
 // TODO (you): return the cache statistics for GET /api/cache/stats.
 export function getCacheStats() {
-  // throw new Error('getCacheStats is not written yet');
   let entries = 0;
 
   for (const entry of cache.values()) {

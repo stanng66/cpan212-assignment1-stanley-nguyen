@@ -6,7 +6,6 @@ const cache = new Map();   // A Map with { value, expiresAt } entries works well
 // It needs a way to get a value (counting a hit or a miss),
 let hits = 0;
 let misses = 0; 
-
 const ttlSeconds = config.cacheTtlSeconds;
 
 // Checks if any entry is expired
@@ -34,7 +33,7 @@ export function get(key) {
 
 // store a value,
 export function set(key, value) {
-  const expiresAt = Date.now() + ttlSeconds * 1000;
+  const expiresAt = Date.now() + ttlSeconds * 600;
   cache.set(key, { value, expiresAt });   // A Map with { value, expiresAt } entries works well.
 }
 

@@ -43,35 +43,45 @@ This assignment works on building an Express service that answers weather questi
 
 ---
 ## 6. Testing
-1. weather for a city: 200
-curl -i "http://localhost:4000/api/weather?city=Toronto"  
-
-2. the same city again (cached): 200 
+1. weather for a city:  
    curl -i "http://localhost:4000/api/weather?city=Toronto"  
+   --> status response: 200
 
-3. weather without a city: 400
+2. the same city again (cached):  
+   curl -i "http://localhost:4000/api/weather?city=Toronto"  
+   --> statuse response: 200   
+
+3. weather without a city:  
    curl -i "http://localhost:4000/api/weather"  
+   --> statuse response: 400
 
-4. weather for a city that doesn't exist: 404 
+4. weather for a city that doesn't exist:  
    curl -i "http://localhost:4000/api/weather?city=NotARealCity"  
+   --> statuse response: 404
 
-5. compare three cities: 200
+5. compare three cities:
    curl -i "http://localhost:4000/api/compare?cities=Toronto,Vancouver,Halifax"  
+   --> statuse response: 200
 
-6. compare with one city that doesn't exist: 200
+6. compare with one city that doesn't exist:  
    curl -i "http://localhost:4000/api/compare?cities=Toronto,FakeCity,Halifax"  
+   --> statuse response: 200
 
-7. compare too many cities: 400
-   curl -i "http://localhost:4000/api/compare?cities=A,B,C,D,E,F"  
+7. compare too many cities:  
+   curl "http://localhost:4000/api/compare?cities=Toronto,Halifax,Vancouver,Calgary,Edmonton,Ottawa"  
+   --> statuse response: 400
 
-8. compare with a repeated city: 400
-   curl -i "http://localhost:4000/api/compare?cities=Toronto,Toronto"  
+8. compare with a repeated city:  
+   curl -i "http://localhost:4000/api/compare?cities=Toronto,Halifax,toronto"  
+   --> statuse response: 400
 
-9. cache stats: 200
+9. cache stats:
    curl -i "http://localhost:4000/api/cache/stats"  
+   --> statuse response: 200
 
 10. an unknown route: 404
     curl -i "http://localhost:4000/api/does-not-exist"  
+    --> statuse response: 404
 
 ---
 ## 7. AI Use

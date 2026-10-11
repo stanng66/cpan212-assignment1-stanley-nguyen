@@ -24,13 +24,13 @@ weatherRouter.get('/compare', async (req, res, next) => {
   try {
     // Validate with parseCities, 
     const cities = parseCities(req.query.cities);
-
     // start every lookup at once with Promise.allSettled,
     const lookups = cities.map(city => getCityWeather(city));
     const results = await Promise.allSettled(lookups);
     // then build the cities array
     const finalArray = results.map((result, index) => {
-      const city = cities[index];
+    const city = cities[index];
+
       if (result.status === 'fulfilled') { 
         return { city, ok: true, weather: result.value };
       }

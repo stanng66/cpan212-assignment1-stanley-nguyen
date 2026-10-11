@@ -7,5 +7,4 @@ export const cacheRouter = Router();
 cacheRouter.get('/cache/stats', (req, res) => {
   const stats = getCacheStats();
   res.json({ data: stats });
-  // res.status(501).json({ error: { message: 'Not written yet: GET /api/cache/stats' } });
 });

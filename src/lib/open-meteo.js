@@ -6,7 +6,7 @@ import { HttpError } from './http-error.js';
 
 // TODO (you): write a helper that fetches a URL and returns the parsed JSON.
 async function fetchJson(url, serviceName) {
-  // - Pass signal: AbortSignal.timeout(config.upstreamTimeoutMs) to fetch.
+  // Pass signal: AbortSignal.timeout(config.upstreamTimeoutMs) to fetch.
   try {
     const res = await fetch(url, {
       signal: AbortSignal.timeout(config.upstreamTimeoutMs)
@@ -21,7 +21,7 @@ async function fetchJson(url, serviceName) {
       throw new HttpError(502, `Could not get a valid response from the ${serviceName} service`);
     }
   } catch (err) {
-    //   - Turn every failure into an HttpError: 504 when the timeout fired (err.name is 'TimeoutError')
+    // Turn every failure into an HttpError: 504 when the timeout fired (err.name is 'TimeoutError')
     if (err.name === 'TimeoutError') {
       throw new HttpError(
         504,
@@ -36,10 +36,11 @@ async function fetchJson(url, serviceName) {
 
     throw err;
   }
-}  // end of async
+}
 
 // TODO (you): look up a city with the geocoding API 
 export async function geocodeCity(name) {
+  // open-meteo reuqest # 1 from assignment page
   const url = `${config.geocodingUrl}/search?name=${encodeURIComponent(name)}` + `&count=1&language=en&format=json`;
   
   const data = await fetchJson(url, 'geocoding');
@@ -64,6 +65,7 @@ export async function geocodeCity(name) {
 
 // TODO (you): get the current weather and a 3-day daily forecast from the forecast API 
 export async function getForecast(latitude, longitude) {
+  // open-meteo request # 2 from assignment page
   const url = `${config.forecastUrl}/forecast?latitude=${latitude}&longitude=${longitude}` + `&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code` + `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max` + `&timezone=auto&forecast_days=3`;
 
   // return the parsed response.
