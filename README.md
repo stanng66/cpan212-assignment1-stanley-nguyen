@@ -49,39 +49,39 @@ This assignment works on building an Express service that answers weather questi
 
 2. the same city again (cached):  
    curl -i "http://localhost:4000/api/weather?city=Toronto"  
-   --> statuse response: 200   
+   --> status response: 200   
 
 3. weather without a city:  
    curl -i "http://localhost:4000/api/weather"  
-   --> statuse response: 400
+   --> status response: 400
 
 4. weather for a city that doesn't exist:  
    curl -i "http://localhost:4000/api/weather?city=NotARealCity"  
-   --> statuse response: 404
+   --> status response: 404
 
 5. compare three cities:
    curl -i "http://localhost:4000/api/compare?cities=Toronto,Vancouver,Halifax"  
-   --> statuse response: 200
+   --> status response: 200
 
 6. compare with one city that doesn't exist:  
    curl -i "http://localhost:4000/api/compare?cities=Toronto,FakeCity,Halifax"  
-   --> statuse response: 200
+   --> status response: 200
 
 7. compare too many cities:  
-   curl "http://localhost:4000/api/compare?cities=Toronto,Halifax,Vancouver,Calgary,Edmonton,Ottawa"  
-   --> statuse response: 400
+   curl -i "http://localhost:4000/api/compare?cities=Toronto,Halifax,Vancouver,Calgary,Edmonton,Ottawa"  
+   --> status response: 400
 
 8. compare with a repeated city:  
    curl -i "http://localhost:4000/api/compare?cities=Toronto,Halifax,toronto"  
-   --> statuse response: 400
+   --> status response: 400
 
 9. cache stats:
    curl -i "http://localhost:4000/api/cache/stats"  
-   --> statuse response: 200
+   --> status response: 200
 
 10. an unknown route: 404
     curl -i "http://localhost:4000/api/does-not-exist"  
-    --> statuse response: 404
+    --> status response: 404
 
 ---
 ## 7. AI Use
