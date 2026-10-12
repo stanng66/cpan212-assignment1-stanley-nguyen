@@ -26,7 +26,7 @@ This assignment works on building an Express service that answers weather questi
 | CACHE_TTL_SECONDS | 600 | How long a cached answer stays valid |
 
 ---
-### 4. Endpoints
+## 4. Endpoints
 | Endpoint | Request example | Description |
 |----------|-----------------|-------------|
 | GET /api/weather | curl -i "http://localhost:4000/api/weather?city=Toronto" | Looks up one city and returns a weather summary with current conditions and a 3‑day forecast. | 
@@ -91,4 +91,4 @@ This assignment works on building an Express service that answers weather questi
 ---
 ## 8. Credit
 - Used the assignments/assignment-1-starter repository provided by Professor Dor.
--  Weather data provided by Open-Meteo API - https://open-meteo.com/
+- Weather data provided by Open-Meteo API - https://open-meteo.com/
